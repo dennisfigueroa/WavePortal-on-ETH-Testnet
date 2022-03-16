@@ -1,4 +1,5 @@
 const main = async () => {
+    const [owner, randomPerson] = await hre.ethers.getSigners();
   // Compile our contract and generate the necessary files we need to work with our contract. 
   const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
   /* Hardhat is creating a local ethereum network for us, just for this contract, then after script completes,
