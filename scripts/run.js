@@ -1,8 +1,8 @@
 const main = async () => {
-  const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
-  const waveContract = await waveContractFactory.deploy();
-  await waveContract.deployed();
-  console.log("Contract addy:", waveContract.address);
+  const waveContractFactory = await hre.ethers.getContractFactory("WavePortal"); //Compile our contract and generate the necessary fields to work with our contract under artifacts directory. 
+  const waveContract = await waveContractFactory.deploy(); //Helper function that wil create local ethereum network then after destroyed. 
+  await waveContract.deployed(); //await the promise for being deployed to be resolved. 
+  console.log("Contract deployed to:", waveContract.address); //Console log out the contract address. Remember the consturctor in the contract will also deploy once it is complete.   
 
   let waveCount;
   waveCount = await waveContract.getTotalWaves();

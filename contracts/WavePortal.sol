@@ -7,14 +7,13 @@ import "hardhat/console.sol";
 contract WavePortal {
     uint256 totalWaves;
 
-    /*
-     * A little magic, Google what events are in Solidity!
-     */
+    //Essentially, this event gives us something to feed information to the frontend UI. 
     event NewWave(address indexed from, uint256 timestamp, string message);
 
     /*
      * I created a struct here named Wave.
      * A struct is basically a custom datatype where we can customize what we want to hold inside it.
+     Here, we are creating a 'wave'. 
      */
     struct Wave {
         address waver; // The address of the user who waved.
@@ -28,7 +27,7 @@ contract WavePortal {
      */
     Wave[] waves;
 
-    constructor() {
+    constructor() { //remember, constructors are executed upon the contract being created. 
         console.log("I AM SMART CONTRACT. POG.");
     }
 
@@ -39,7 +38,7 @@ contract WavePortal {
      */
     function wave(string memory _message) public {
         totalWaves += 1;
-        console.log("%s waved w/ message %s", msg.sender, _message);
+        console.log("%s waved w/ message %s", msg.sender, _message); //this will send us the message that the sender waved at us with. 
 
         /*
          * This is where I actually store the wave data in the array.
@@ -47,8 +46,7 @@ contract WavePortal {
         waves.push(Wave(msg.sender, _message, block.timestamp));
 
         /*
-         * I added some fanciness here, Google it and try to figure out what it is!
-         * Let me know what you learn in #general-chill-chat
+         * Here, I am just emitting that a wave has been made to allow the frontend the ability to use the address it was created from, the timestamp and the message they sent. 
          */
         emit NewWave(msg.sender, block.timestamp, _message);
     }
