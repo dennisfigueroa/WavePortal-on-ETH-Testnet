@@ -27,7 +27,11 @@ contract WavePortal {
      */
     Wave[] waves;
 
+<<<<<<< HEAD
     constructor() { //remember, constructors are executed upon the contract being created. 
+=======
+    constructor() payable {
+>>>>>>> 6fdf5fe41bed59651dda4281f0e72702998ae16a
         console.log("I AM SMART CONTRACT. POG.");
     }
 
@@ -49,6 +53,14 @@ contract WavePortal {
          * Here, I am just emitting that a wave has been made to allow the frontend the ability to use the address it was created from, the timestamp and the message they sent. 
          */
         emit NewWave(msg.sender, block.timestamp, _message);
+
+        uint256 prizeAmount = 0.00001 ether;
+        require(
+            prizeAmount <= address(this).balance,
+            "Trying to withdraw more money than the contract has"
+        );
+        (bool success, ) = (msg.sender).call{value: prizeAmount}("");
+        require(success, "Failed to withdraw money from contract.");
     }
 
     /*
